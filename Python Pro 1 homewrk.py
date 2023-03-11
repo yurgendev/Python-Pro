@@ -12,7 +12,6 @@ class Cars:
         return f"This is a {self.description}, equipment here is: {self.type} and price is {self.price}"
 
 
-
 # 2. Створіть клас "Покупець". У якості атрибутів можна використовувати
 # прізвище, ім'я, по батькові, мобільний телефон тощо.
 
@@ -27,46 +26,54 @@ class Customer:
         return f"Customer name: {self.name}, {self.surname}, {self.number}, \n{self.delivery_address}."
 
 
-
-
 # 3. Створіть клас "Замовлення". Замовлення може містити декілька товарів певної кількості.
 # Замовлення має містити дані про користувача, який його здійснив. Реалізуйте метод обчислення сумарної
 # вартості замовлення. Визначте метод str() для коректного виведення інформації про це замовлення.
 
 
 class Order:
-    def __init__(self, car, customer):
-            self.car = car
-            self.customer = customer
-            self.total_price = car.price
+    def __init__(self, customer):
+        self.customer = customer
+        self.items = {}
+
+    def add_item(self, item, quantity=1):
+        if item in self.items:
+            self.items[item] += quantity
+        else:
+            self.items[item] = quantity
+
+    def get_total_price(self):
+        total_price = 0
+        for item, quantity in self.items.items():
+            total_price += item.price * quantity
+        return total_price
 
     def __str__(self):
-        return f"Order info: \n{self.car}, \n{self.customer}, \nTotal price: {self.total_price}"
-
-    def add_item(self, *cars):
-        for car in cars:
-            self.total_price += car.price
+        items_str = "\n".join([f"{item.description} x {quantity} - {item.price*quantity}$" for item, quantity in self.items.items()])
+        return f"Order by {self.customer.name} {self.customer.surname}:\n{items_str}\nTotal price: {self.get_total_price()}$"
 
 
 
 car1 = Cars(12500, 'Mercedes Benz C300', 'Cabrio')
-customer1 = Customer('Stepan', 'Bandera', '+380970000001', 'Ukraine: Lviv, str. tra-la-la, 28')
-order1 = Order(car1, customer1)
-
 car2 = Cars(10000, 'BMW 528i', 'Sedan')
 car3 = Cars(50000, 'BMW 730', 'Sedan')
+car4 = Cars(250_000, 'Urus', 'SUV')
+
+customer1 = Customer('Stepan', 'Bandera', '+380970000001', 'Ukraine: Lviv, str. tra-la-la, 28')
 customer2 = Customer('Isaak', 'Avraamovich', '+380970000002', 'Israel: Petakh-Tikva, str. ola-la, 1/2')
-order2 = Order(car2, customer2)
-
-print(order1)
-print()
-print(order2)
-
-order2.add_item(car2, car3)
-
-print(f'if Customer buys both cars it costs: {order2.total_price}')
 
 
+
+
+
+order = Order(customer2)
+order.add_item(car1, 1)
+order.add_item(car2, 2)
+order.add_item(car3, 3)
+order.add_item(car4, 1)
+print(order)
+print('*'* 50)
+print(customer2)
 
 
 
