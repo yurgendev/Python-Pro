@@ -61,13 +61,15 @@ class Group():
     def add_student(self, student):
         if len(self.students) <= 10:
             self.students.append(student)
-            logger.info(f"{student} has been added to the group")
+            logger.info(f"Student {student.name} has been added to {student.faculty} on the {student.course}course")
         if len(self.students) > self.max_students:
             raise MaxStdInGroup('there can be no more than 10 students in a group')
 
     def del_student(self, student):
         if student in self.students:
             self.students.remove(student)
+            logger.info(f"Student {student.name} has been deleted")
+
 
     def find_student(self, name):
         for student in self.students:
