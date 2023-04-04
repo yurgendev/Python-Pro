@@ -4,6 +4,16 @@
 # площ прямокутників, які ви складаєте).
 # d) Реалізуйте методи множення прямокутника на число n (це має збільшити площу базового прямокутника в n разів).
 
+# 1. a)Створіть клас «Прямокутник», у якого є два поля (ширина і висота).
+# b)Реалізуйте метод порівняння прямокутників за площею.
+# c)Також реалізуйте методи складання прямокутників (площа сумарного прямокутника повинна дорівнювати сумі
+# площ прямокутників, які ви складаєте).
+# d) Реалізуйте методи множення прямокутника на число n (це має збільшити площу базового прямокутника в n разів).
+
+
+
+
+
 class Rectangle:
 
     def __init__(self, width: int | float, height: int | float):
@@ -11,7 +21,7 @@ class Rectangle:
         self.height = height
 
     def __str__(self):
-        return f'{self.width} rect1 {self.height}'
+        return f'Rectangle: width={self.width}, height={self.height}'
 
     # overloads methods of comparison operators
     def __gt__(self, other):
@@ -31,21 +41,23 @@ class Rectangle:
 
     def __add__(self, other):
         if isinstance(other, Rectangle):
-            return self.width * self.height + other.width * other.height
+            return Rectangle(self.width + other.width, self.height + other.height)
         else:
             raise TypeError
 
     def __mul__(self, other: int):
-        return (self.width * self.height) * other
+        return Rectangle(self.width * other, self.height * other)
 
 
 rect1 = Rectangle(5, 10)
 rect2 = Rectangle(3, 4)
 
-print(rect1 * 3)
-print(rect2 + rect1)
-print(rect1 > rect2)
-print(rect1 < rect2)
+rect3 = rect1 * 2
+rect4 = rect1 + rect2
+print(rect3)
+print(rect4)
+
+
 
 # 2. Створіть клас «Правильна дроба» та реалізуйте методи порівняння, додавання, віднімання та множення
 # для екземплярів цього класу.
