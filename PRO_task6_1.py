@@ -60,6 +60,9 @@ class Group():
     def __str__(self):
         return f"This group consists of {len(self.students)} students"
 
+    def __getitem__(self, item):
+        return self.students[item]
+    
     def __iter__(self):
         return iter(self.students)
 
