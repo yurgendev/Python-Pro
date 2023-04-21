@@ -61,8 +61,7 @@ class Group():
         return f"This group consists of {len(self.students)} students"
 
     def __iter__(self):
-        self.current_index = 0
-        return self
+        return iter(self.students)
 
     def __next__(self):
         if self.current_index >= len(self.students):
