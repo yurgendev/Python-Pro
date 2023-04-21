@@ -66,13 +66,13 @@ class Group():
     def __iter__(self):
         return iter(self.students)
 
-    def __next__(self):
-        if self.current_index >= len(self.students):
-            raise StopIteration
-        else:
-            student = self.students[self.current_index]
-            self.current_index += 1
-            return student
+#     def __next__(self):
+#         if self.current_index >= len(self.students):
+#             raise StopIteration
+#         else:
+#             student = self.students[self.current_index]
+#             self.current_index += 1
+#             return student
 
 
 
