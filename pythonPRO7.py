@@ -59,5 +59,5 @@ for nums in prime(15):
 # Список повинен бути заповнений кубами чисел від 2 до вказаної вами величини.
 range_limit = 10
 generator_list = (x ** 3 for x in range(range_limit))
-print(generator_list)
+print(*generator_list)
 
